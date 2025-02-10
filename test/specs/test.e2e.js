@@ -23,9 +23,18 @@ describe('My Login application', () => {
             }
         });
     });
+        // Username contains special symbols
+        it('should display error message when logging in with username containing special symbols', async () => {
+            const specialUsername = 'user!@#';
+            const password = 'SuperSecretPassword!';
+        
+            await LoginPage.open();
+        
+            await LoginPage.login(specialUsername, password);
+        
+            await expect(SecurePage.flashAlert).toBeExisting();
+            await expect(SecurePage.flashAlert).toHaveText(
+                expect.stringContaining('Your username is invalid!')
+            );
+        });
 });
-
-
-function hello(){
-    
-}
