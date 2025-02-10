@@ -28,13 +28,18 @@ describe('My Login application', () => {
             const specialUsername = 'user!@#';
             const password = 'SuperSecretPassword!';
         
-            await LoginPage.open();
-        
-            await LoginPage.login(specialUsername, password);
-        
-            await expect(SecurePage.flashAlert).toBeExisting();
-            await expect(SecurePage.flashAlert).toHaveText(
-                expect.stringContaining('Your username is invalid!')
-            );
+            try {
+                await LoginPage.open();
+                await LoginPage.login(specialUsername, password);
+                await expect(SecurePage.flashAlert).toBeExisting();
+                await expect(SecurePage.flashAlert).toHaveText(
+                    expect.stringContaining('Your username is invalid!')
+                );
+            } catch (error) {
+                console.error('Special characters test failed:', error);
+                throw error;
+            } finally {
+                await LoginPage.reset(); // Assuming reset method exists
+            }
         });
 });
