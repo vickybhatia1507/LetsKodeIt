@@ -16,10 +16,10 @@ describe('My Login application', () => {
                 await LoginPage.login(username, password)
                 await expect(SecurePage.flashAlert).toBeExisting()
                 await expect(SecurePage.flashAlert).toHaveText(
-                    expect.stringContaining('You logged into a secure area!'))
+                    expect.stringContaining('You logged into a secure area successfully!'))
             } catch (error) {
                 console.error('Login failed:', error)
-                throw new Error('Login process encountered an error')
+                throw new Error('Login process encountered an error due to which login attempt failed')
             }
         });
     });
