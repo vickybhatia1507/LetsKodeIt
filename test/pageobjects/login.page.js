@@ -34,12 +34,7 @@ class LoginPage extends Page {
      * overwrite specific options to adapt it to page object
      */
     open () {
-        try {
-            return super.open('login');
-        } catch (error) {
-            console.error('Failed to open login page:', error);
-            // Handle the error appropriately, e.g., throw a custom error or return a fallback value
-        }
+        return super.open('login');
     }
 }
 
